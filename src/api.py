@@ -1,13 +1,13 @@
 import requests
 import json
 
-from constants import *
+from src.constants import *
 from urllib.parse import urlencode
 
 
 def get_address_coordinates(address):
     if not address:
-        return 'ERROR: address connot be empty'
+        return ['ERROR: address connot be empty']
 
     params = encode_params({'key': API_KEY})
     url = f"{HOST}/search/{V2}/geocode/{address}.json?{params}"
@@ -18,7 +18,7 @@ def get_address_coordinates(address):
         longitude = data["results"][0]["position"]["lon"]
         return latitude, longitude
     except Exception as e:
-        return f"ERROR: Unable to retrive coordinaes: {e}"
+        return [f"ERROR: Unable to retrive coordinates: {e}"]
 
 
 def get_directions(src, dst):
@@ -35,8 +35,8 @@ def get_directions(src, dst):
         response = requests.get(url)
         data = json.loads(response.text)
         instructions = data['routes'][0]['guidance']['instructions']
-        for instruction in instructions:
-            directions.append(instruction['message'])
+        for i, instruction in enumerate(instructions):
+            directions.append(f'{i + 1}. {instruction['message']}')
         return directions
     except Exception as e:
         return [f"ERROR: Unable to retrive directions: {e}"]

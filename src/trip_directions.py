@@ -1,3 +1,4 @@
+import src.api as api
 import tkinter as tk
 from tkinter import font
 
@@ -69,14 +70,9 @@ class TripDirections(tk.Tk):
         self.read_only = text
 
     def _on_click(self):
-        # @TODO: Make api calls to get addresses coordinates
-
-        # @TODO: Make api call to get directions instructions
-        instructions = [
-            '1. hello',
-            '2. world',
-            '3. !!!'
-        ]
+        src = api.get_address_coordinates(self.inputs[0].get())
+        dst = api.get_address_coordinates(self.inputs[1].get())
+        instructions = api.get_directions(src, dst)
 
         self.read_only.config(state=tk.NORMAL)
         self.read_only.delete('1.0', tk.END)
