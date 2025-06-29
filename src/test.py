@@ -11,7 +11,7 @@ class TestAPI(unittest.TestCase):
 
     def test_get_coordinates_empty(self):
         address = ''
-        expected = 'ERROR: address connot be empty'
+        expected = 'ERROR: addresses connot be empty'
         result = get_address_coordinates(address)
         self.assertEqual(expected, result[0])
 

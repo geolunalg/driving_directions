@@ -7,7 +7,7 @@ from urllib.parse import urlencode
 
 def get_address_coordinates(address):
     if not address:
-        return ['ERROR: address connot be empty']
+        return ['ERROR: addresses connot be empty']
 
     params = encode_params({'key': API_KEY})
     url = f"{HOST}/search/{V2}/geocode/{address}.json?{params}"

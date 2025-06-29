@@ -5,7 +5,7 @@ def main():
     print("directions app!!")
     app = TripDirections()
     app.display()
-    app.geometry("600x800")
+    app.geometry("600x700")
     app.mainloop()
 
 

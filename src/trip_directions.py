@@ -71,9 +71,19 @@ class TripDirections(tk.Tk):
 
     def _on_click(self):
         src = api.get_address_coordinates(self.inputs[0].get())
-        dst = api.get_address_coordinates(self.inputs[1].get())
-        instructions = api.get_directions(src, dst)
+        if isinstance(src, list):
+            self._print_directions(src)
+            return
 
+        dst = api.get_address_coordinates(self.inputs[1].get())
+        if isinstance(dst, list):
+            self._print_directions(dst)
+            return
+
+        instructions = api.get_directions(src, dst)
+        self._print_directions(instructions)
+
+    def _print_directions(self, instructions):
         self.read_only.config(state=tk.NORMAL)
         self.read_only.delete('1.0', tk.END)
 
